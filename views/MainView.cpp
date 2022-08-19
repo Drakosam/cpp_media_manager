@@ -4,13 +4,25 @@
 
 #include "MainView.h"
 
-MainView::MainView(QMainWindow *parent) : QMainWindow(parent) {
-    test = new QPushButton("test", reinterpret_cast<QWidget *>(this));
+#include <memory>
 
+MainView::MainView(QMainWindow *parent) : QMainWindow(parent) {
+    tabWidget = std::make_unique<QTabWidget>(this);
+
+    image = new ImageView();
+    settings = new SettingsView();
+
+    tabWidget->addTab(image, "image");
+    tabWidget->addTab(settings, "settings");
 }
 
 void MainView::resizeEvent(QResizeEvent *event) {
     QMainWindow::resizeEvent(event);
-    test->resize(this->width(), 30);
-    test->move(0, this->height()-30);
+    tabWidget->resize(this->width(), this->height());
+
+}
+
+MainView::~MainView() {
+    delete image;
+    delete settings;
 }

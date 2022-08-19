@@ -14,7 +14,7 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(pet_project main.cpp views/MainView.cpp views/MainView.h)
+add_executable(pet_project main.cpp views/MainView.cpp views/MainView.h views/ImageView.cpp views/ImageView.h views/SettingsView.cpp views/SettingsView.h)
 target_link_libraries(pet_project
         Qt::Core
         Qt::Gui

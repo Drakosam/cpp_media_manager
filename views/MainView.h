@@ -4,17 +4,23 @@
 #ifndef PET_PROJECT_MAINVIEW_H
 #define PET_PROJECT_MAINVIEW_H
 
-#include <QWidget>
 #include <QPushButton>
 #include <QMainWindow>
+#include <QTabWidget>
+#include "ImageView.h"
+#include "SettingsView.h"
 
 class MainView : public QMainWindow {
     Q_OBJECT
 public:
-    explicit MainView(QMainWindow *parent = 0);
+    explicit MainView(QMainWindow *parent = nullptr);
+    ~MainView() override;
 
-    QPushButton* test;
 protected:
+    std::unique_ptr<QTabWidget> tabWidget;
+    ImageView* image;
+    SettingsView* settings;
+
     void resizeEvent(QResizeEvent *event) override;
 };
 
