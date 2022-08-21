@@ -7,8 +7,10 @@
 #include <QPushButton>
 #include <QMainWindow>
 #include <QTabWidget>
-#include "ImageView.h"
+#include <QString>
+#include "ShowView.h"
 #include "SettingsView.h"
+#include "../utylity/Collection.h"
 
 class MainView : public QMainWindow {
     Q_OBJECT
@@ -16,9 +18,13 @@ public:
     explicit MainView(QMainWindow *parent = nullptr);
     ~MainView() override;
 
-protected:
+public slots:
+    void menageNewCollection(const QString&);
+
+private:
     std::unique_ptr<QTabWidget> tabWidget;
-    ImageView* image;
+    Collection *collectionManager;
+    ShowView* image;
     SettingsView* settings;
 
     void resizeEvent(QResizeEvent *event) override;

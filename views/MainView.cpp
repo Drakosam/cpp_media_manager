@@ -1,19 +1,26 @@
 //
 // Created by dkiszuk on 18.08.2022.
 //
+#include <QDebug>
 
 #include "MainView.h"
-
-#include <memory>
 
 MainView::MainView(QMainWindow *parent) : QMainWindow(parent) {
     tabWidget = std::make_unique<QTabWidget>(this);
 
-    image = new ImageView();
+    image = new ShowView();
     settings = new SettingsView();
 
     tabWidget->addTab(image, "image");
     tabWidget->addTab(settings, "settings");
+
+    collectionManager = new Collection();
+    image->setupCollectionManager(collectionManager);
+
+    connect(settings,
+            SIGNAL(newCollectionSelected(QString)),
+            this,
+            SLOT( menageNewCollection(QString) ));
 }
 
 void MainView::resizeEvent(QResizeEvent *event) {
@@ -25,4 +32,10 @@ void MainView::resizeEvent(QResizeEvent *event) {
 MainView::~MainView() {
     delete image;
     delete settings;
+    delete collectionManager;
+}
+
+void MainView::menageNewCollection(const QString& path) {
+    collectionManager->importCollection(path);
+    image->setupCollectionNames();
 }

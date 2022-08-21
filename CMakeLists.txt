@@ -6,7 +6,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_PREFIX_PATH "C:/Qt/6.3.1/mingw_64/lib/cmake")
 
 find_package(Qt6 COMPONENTS
         Core
@@ -14,7 +13,25 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(pet_project main.cpp views/MainView.cpp views/MainView.h views/ImageView.cpp views/ImageView.h views/SettingsView.cpp views/SettingsView.h)
+add_executable(
+        pet_project
+        main.cpp
+        views/MainView.cpp
+        views/MainView.h
+        views/ShowView.cpp
+        views/ShowView.h
+        views/SettingsView.cpp
+        views/SettingsView.h
+        components/ImageComponent.cpp
+        components/ImageComponent.h
+        utylity/Collection.cpp
+        utylity/Collection.h
+        utylity/CollectionItem.cpp
+        utylity/CollectionItem.h
+        components/CollectionListComponent.cpp
+        components/CollectionListComponent.h
+)
+
 target_link_libraries(pet_project
         Qt::Core
         Qt::Gui
